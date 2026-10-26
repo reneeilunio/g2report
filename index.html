@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art of Emerging Europe | Interactive Lesson</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+<a class="brand" href="#home">EUROPA<span>.</span></a>
+<nav class="main-nav"><a href="#home">Home</a><a href="#timeline">Timeline</a><a href="#compare">Compare</a><a href="#activity">Activity</a></nav>
+<button class="nav-start" data-scroll="#timeline">Start Journey</button>
+</header>
+<main>
+<section id="home" class="hero">
+<div class="hero-art art-left">ART</div><div class="hero-art art-right">EUROPE</div>
+<div class="hero-inner">
+<p class="kicker">ART APPRECIATION · LESSON 6</p>
+<h1>Art of<br><em>Emerging</em><br>Europe</h1>
+<p class="hero-copy">Explore major periods in Western art history, compare how artists communicated ideas through different styles, and discover the works that shaped European visual culture.</p>
+<button class="primary-btn" data-scroll="#timeline">Enter the Gallery →</button>
+</div>
+</section>
+<section class="intro"><div><p class="kicker">THE BIG IDEA</p><h2>Europe uses art<br>to <em>communicate.</em></h2></div><p>This interactive version turns the lesson into a guided gallery. Choose a period, open its story, inspect the featured artworks, then test what you learned.</p></section>
+<section id="timeline" class="timeline-section">
+<div class="section-head"><div><p class="kicker">YOUR JOURNEY</p><h2>Walk through the timeline.</h2></div><p>Click any period to open the lesson card.</p></div>
+<div class="timeline" id="timelineList"></div>
+</section>
+<section id="compare" class="compare-section">
+<div class="section-head"><div><p class="kicker">COMPARE THE STYLES</p><h2>Same continent.<br>Very different voices.</h2></div><p>Compare the ideas and visual qualities highlighted in the lesson.</p></div>
+<div class="compare-grid">
+<article class="compare-card"><span>01</span><h3>Baroque & Rococo</h3><p>Ornaments · Extravagant · Symmetry · Fluid designs</p></article>
+<article class="compare-card"><span>02</span><h3>Neoclassicism</h3><p>Greek & Roman influence · Order · Classical revival</p></article>
+<article class="compare-card"><span>03</span><h3>Romanticism</h3><p>Revolution · Emotion · Heroic elements · Nationalism</p></article>
+<article class="compare-card"><span>04</span><h3>Realism</h3><p>Accuracy of detail · Reality · Social change</p></article>
+<article class="compare-card"><span>05</span><h3>Impressionism</h3><p>Brushstrokes · Color · Light · Immediate impression</p></article>
+</div>
+</section>
+<section id="activity" class="activity-section">
+<div class="activity-card"><p class="kicker">PERFORMANCE TASK 6</p><h2>Your turn.</h2><p>Which art movement in Western Europe do you like the most? Choose one, select an artwork produced in that movement, and explain why you chose it.</p>
+<div class="activity-controls"><label for="movementSelect">Choose a movement</label><select id="movementSelect"><option value="">Select a movement...</option></select><label for="reasonInput">Why did you choose it?</label><textarea id="reasonInput" rows="5" placeholder="Write your explanation here..."></textarea><button class="primary-btn" id="saveActivity">Save My Choice</button><p class="saved-message" id="savedMessage"></p></div></div>
+</section>
+</main>
+<footer><div><strong>EUROPA.</strong><span> Interactive Art Appreciation</span></div><p>Based on the provided “Art of Emerging Europe” lesson material.</p></footer>
+<div class="modal-backdrop" id="lessonModal" aria-hidden="true"><div class="lesson-modal" role="dialog" aria-modal="true"><button class="close-modal" id="closeModal" aria-label="Close">×</button><p class="kicker" id="modalPeriod"></p><h2 id="modalTitle"></h2><p class="modal-description" id="modalDescription"></p><div class="modal-columns"><div><h3>Key ideas</h3><ul id="modalIdeas"></ul></div><div><h3>Featured works / artists</h3><ul id="modalWorks"></ul></div></div><div class="modal-note" id="modalNote"></div></div></div>
+<script src="script.js"></script>
+</body>
+</html>
