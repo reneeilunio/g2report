@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap');
 
 :root {
-  --bg: #f1efe8;
-  --ink: #20221e;
-  --muted: #696b63;
-  --green: #455b43;
-  --lime: #d6e56b;
-  --line: #d4d1c6;
-  --dark: #171916;
+  --bg: #f5f0eb;
+  --ink: #292321;
+  --muted: #766a67;
+  --green: #741f2b;
+  --lime: #e8c9c9;
+  --line: #d8c9c5;
+  --dark: #260d13;
+  --rose: #a94b57;
+  --paper: #fffaf6;
 }
 
 * {
@@ -36,12 +38,16 @@ input {
   font: inherit;
 }
 
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 header {
   height: 76px;
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(241, 239, 232, 0.94);
+  background: rgba(245, 240, 235, .94);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
   display: flex;
@@ -52,22 +58,23 @@ header {
 
 .logo {
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: .16em;
   font-size: 1.15rem;
 }
 
 .logo span {
-  color: #879747;
+  color: var(--green);
 }
 
 nav {
   display: flex;
   gap: 30px;
-  font-size: 0.82rem;
+  font-size: .82rem;
 }
 
 nav a {
-  color: #55574f;
+  color: #766a67;
+  transition: color .2s;
 }
 
 nav a:hover {
@@ -75,17 +82,21 @@ nav a:hover {
 }
 
 .nav-cta {
-  font-size: 0.78rem;
+  font-size: .78rem;
   border: 1px solid var(--ink);
   padding: 11px 16px;
   border-radius: 30px;
+  transition: .2s;
+}
+
+.nav-cta:hover {
+  background: var(--dark);
+  color: white;
 }
 
 .menu {
   display: none;
 }
-
-/* HERO */
 
 .hero {
   min-height: 680px;
@@ -101,10 +112,10 @@ nav a:hover {
 .hero-image {
   position: absolute;
   inset: 0 0 0 39%;
-  opacity: 0.52;
+  opacity: .52;
   background:
-    linear-gradient(90deg, #171916 0%, transparent 50%),
-    linear-gradient(0deg, #171916 0%, transparent 45%),
+    linear-gradient(90deg, var(--dark) 0%, transparent 50%),
+    linear-gradient(0deg, var(--dark) 0%, transparent 45%),
     url('https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=1800&q=85')
     center / cover;
 }
@@ -112,28 +123,29 @@ nav a:hover {
 .hero-content {
   position: relative;
   max-width: 600px;
+  z-index: 1;
 }
 
 .eyebrow {
-  font: 500 0.68rem 'DM Mono', monospace;
-  letter-spacing: 0.15em;
+  font: 500 .68rem 'DM Mono', monospace;
+  letter-spacing: .15em;
   text-transform: uppercase;
   color: var(--green);
 }
 
 .hero .eyebrow {
-  color: var(--lime);
+  color: #e8c9c9;
 }
 
 .hero-small {
   font-size: 1rem;
-  color: #c4c4b9;
+  color: #d8c8c5;
   margin: 40px 0 10px;
 }
 
 .hero h1 {
-  font: 500 clamp(4.2rem, 9vw, 8.5rem) / 0.88 'Playfair Display', serif;
-  letter-spacing: -0.065em;
+  font: 500 clamp(4.2rem, 9vw, 8.5rem)/.88 'Playfair Display', serif;
+  letter-spacing: -.065em;
   margin: 0;
 }
 
@@ -143,14 +155,14 @@ nav a:hover {
 .passport h2 i,
 .artist-layout h2 i,
 .closing h2 i {
-  color: #9aa76b;
+  color: #d38d95;
   font-weight: 500;
 }
 
 .hero-desc {
   max-width: 450px;
   line-height: 1.8;
-  color: #d4d2c8;
+  color: #e0d6d2;
   margin: 28px 0;
 }
 
@@ -159,13 +171,19 @@ nav a:hover {
   align-items: center;
   gap: 30px;
   background: var(--lime);
-  color: #1d2117;
+  color: #42131a;
   padding: 15px 19px;
-  border: 0;
+  border: 1px solid transparent;
   border-radius: 3px;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: .85rem;
   cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+
+.button:hover {
+  background: #f3dede;
+  transform: translateY(-2px);
 }
 
 .button span {
@@ -173,8 +191,8 @@ nav a:hover {
 }
 
 .hero-foot {
-  font: 0.66rem 'DM Mono', monospace;
-  color: #a8aa9e;
+  font: .66rem 'DM Mono', monospace;
+  color: #c8b5b4;
   margin-top: 35px;
 }
 
@@ -182,26 +200,22 @@ nav a:hover {
   position: absolute;
   right: 6%;
   bottom: 10%;
-  border: 1px solid #9fa68b;
-  color: #e2e4d4;
+  border: 1px solid #c78f95;
+  color: #f4e6e3;
   border-radius: 50%;
   width: 110px;
   height: 110px;
   display: grid;
   place-content: center;
   text-align: center;
-  font: 0.58rem / 1.8 'DM Mono', monospace;
+  font: .58rem/1.8 'DM Mono', monospace;
   transform: rotate(10deg);
 }
-
-/* GENERAL LAYOUT */
 
 .wrap {
   width: min(1120px, 88%);
   margin: auto;
 }
-
-/* INTRODUCTION */
 
 .intro {
   display: grid;
@@ -216,27 +230,25 @@ nav a:hover {
 .passport h2,
 .artist-layout h2,
 .closing h2 {
-  font: 500 clamp(2.8rem, 5vw, 5rem) / 1.02 'Playfair Display', serif;
-  letter-spacing: -0.045em;
+  font: 500 clamp(2.8rem, 5vw, 5rem)/1.02 'Playfair Display', serif;
+  letter-spacing: -.045em;
   margin: 14px 0;
 }
 
 .intro-copy {
   align-self: end;
   line-height: 1.8;
-  color: #44463e;
+  color: #514441;
   max-width: 510px;
 }
 
 .muted {
   color: var(--muted);
-  font-size: 0.84rem;
+  font-size: .84rem;
 }
 
-/* ART HISTORY TIMELINE */
-
 .timeline-section {
-  background: #e5e3d9;
+  background: #eee2dd;
   padding: 100px 0;
 }
 
@@ -252,84 +264,113 @@ nav a:hover {
   max-width: 390px;
   line-height: 1.8;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: .9rem;
 }
 
 .timeline-intro {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #bdbeb0;
+  border-bottom: 1px solid #cdbdb8;
   padding: 13px 0;
-  font: 0.65rem 'DM Mono', monospace;
-  letter-spacing: 0.08em;
+  font: .65rem 'DM Mono', monospace;
+  letter-spacing: .08em;
   color: var(--muted);
 }
 
 .timeline-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  padding-top: 18px;
+  gap: 16px;
+  padding-top: 22px;
 }
 
+/* Artwork cards on the timeline */
+
 .period-card {
-  min-height: 205px;
-  background: #f5f3ec;
-  border: 1px solid #d5d3c8;
-  padding: 23px;
+  min-width: 0;
+  min-height: 300px;
+  padding: 0;
+  text-align: left;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid #e1d2ce;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  transition: 0.25s;
-  cursor: pointer;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s, border-color .25s;
 }
 
 .period-card:hover {
-  background: var(--green);
-  color: white;
-  transform: translateY(-3px);
+  transform: translateY(-5px);
+  border-color: var(--rose);
+  box-shadow: 0 12px 28px rgba(60, 17, 26, .12);
 }
 
-.period-card.done::after {
-  content: '✓ EXPLORED';
-  position: absolute;
-  right: 12px;
-  top: 12px;
-  background: var(--lime);
-  color: #1d2117;
-  padding: 5px 7px;
-  font: 0.55rem 'DM Mono', monospace;
+.period-card .period-art {
+  display: block;
+  width: 100%;
+  height: 165px;
+  object-fit: cover;
+  object-position: center;
+  background: #e5d8d3;
+  border-bottom: 1px solid var(--line);
+  transition: transform .35s;
+}
+
+.period-card:hover .period-art {
+  transform: scale(1.025);
+}
+
+.period-card .period-card-copy {
+  padding: 18px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
 }
 
 .period-card .number {
-  font: 0.65rem 'DM Mono', monospace;
-  color: #8a8c7c;
+  font: .63rem 'DM Mono', monospace;
+  letter-spacing: .05em;
+  color: var(--green);
 }
 
 .period-card h3 {
-  font: 500 1.65rem 'Playfair Display', serif;
-  margin: 20px 0 7px;
+  font: 500 1.55rem 'Playfair Display', serif;
+  margin: 8px 0 2px;
+  padding-right: 12px;
 }
 
 .period-card p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.8rem;
-}
-
-.period-card:hover p,
-.period-card:hover .number {
-  color: #e0e5d5;
+  font-size: .78rem;
+  line-height: 1.5;
 }
 
 .period-card .arrow {
-  align-self: flex-end;
-  font-size: 1.3rem;
+  position: absolute;
+  right: 17px;
+  bottom: 15px;
+  font-size: 1.15rem;
+  color: var(--green);
 }
 
-/* COMPARISON SECTION */
+.period-card.done:after {
+  content: '✓ EXPLORED';
+  position: absolute;
+  right: 9px;
+  top: 9px;
+  background: var(--lime);
+  color: #42131a;
+  padding: 6px 8px;
+  font: .55rem 'DM Mono', monospace;
+  z-index: 2;
+}
+
+/* Compare section */
 
 .compare-section {
   padding: 105px 0;
@@ -337,6 +378,7 @@ nav a:hover {
 
 .compare-tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   border-bottom: 1px solid var(--line);
   padding-bottom: 14px;
@@ -345,10 +387,16 @@ nav a:hover {
 .tab {
   border: 1px solid var(--line);
   background: transparent;
+  color: var(--ink);
   padding: 12px 17px;
   border-radius: 25px;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: .8rem;
+  transition: .2s;
+}
+
+.tab:hover {
+  border-color: var(--green);
 }
 
 .tab.active {
@@ -366,13 +414,14 @@ nav a:hover {
 
 .compare-card {
   padding: 25px;
-  background: #e5e3d9;
+  background: #f0e4df;
+  border: 1px solid var(--line);
   min-height: 190px;
 }
 
 .compare-card .num {
-  font: 0.65rem 'DM Mono', monospace;
-  color: #78815a;
+  font: .65rem 'DM Mono', monospace;
+  color: var(--rose);
 }
 
 .compare-card h3 {
@@ -381,30 +430,86 @@ nav a:hover {
 }
 
 .compare-card p {
-  font-size: 0.85rem;
+  font-size: .85rem;
   line-height: 1.7;
-  color: #5f6158;
+  color: #5f504d;
+  margin-bottom: 0;
+}
+
+/* Side-by-side artwork comparisons */
+
+.compare-artwork-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  grid-column: 1 / -1;
+  padding: 24px;
+  background: #f0e4df;
+  border: 1px solid var(--line);
+}
+
+.compare-artwork-pair > div {
+  min-width: 0;
+}
+
+.compare-artwork-pair h3 {
+  font: 500 1.45rem 'Playfair Display', serif;
+  margin: 0 0 15px;
+}
+
+.compare-artwork-pair figure {
+  margin: 0;
+}
+
+.compare-artwork-pair img {
+  display: block;
+  width: 100%;
+  height: 280px;
+  object-fit: contain;
+  background: #e5d8d3;
+}
+
+.compare-artwork-pair figcaption {
+  font-size: .76rem;
+  line-height: 1.6;
+  color: var(--muted);
+  padding-top: 10px;
+}
+
+.compare-artwork-pair figcaption strong {
+  color: var(--ink);
+}
+
+.compare-artwork-pair .pair-note {
+  grid-column: 1 / -1;
+  line-height: 1.8;
+  font-size: .86rem;
+  color: #5e504e;
+  margin: 0;
+  padding-top: 5px;
 }
 
 .slide-note {
-  background: #e4e9d0;
+  background: #f0dedd;
+  border-left: 3px solid var(--green);
   padding: 18px 22px;
   display: flex;
   gap: 20px;
   align-items: start;
-  font-size: 0.83rem;
-  line-height: 1.6;
+  font-size: .83rem;
+  line-height: 1.7;
 }
 
 .slide-note strong {
   white-space: nowrap;
+  color: var(--green);
 }
 
 .slide-note p {
   margin: 0;
 }
 
-/* VIRTUAL PASSPORT */
+/* Virtual passport */
 
 .passport-section {
   background: var(--dark);
@@ -414,7 +519,7 @@ nav a:hover {
 
 .passport {
   display: grid;
-  grid-template-columns: 0.8fr 1fr;
+  grid-template-columns: .8fr 1fr;
   gap: 10%;
   align-items: center;
 }
@@ -425,60 +530,65 @@ nav a:hover {
 
 .passport > div:first-child > p:not(.eyebrow) {
   line-height: 1.8;
-  color: #bfc1b6;
+  color: #d0c0be;
   max-width: 360px;
 }
 
 .passport .eyebrow,
 .artist-layout .eyebrow {
-  color: var(--lime);
+  color: #e8c9c9;
 }
 
 .text-button {
   background: none;
   border: 0;
-  color: var(--lime);
+  color: #e8c9c9;
   padding: 15px 0;
   cursor: pointer;
 }
 
+.text-button:hover {
+  color: white;
+}
+
 .passport-card {
   position: relative;
-  background: #e9e7db;
-  color: #25271f;
+  background: #f1e6e1;
+  color: #292321;
   padding: 26px;
   min-height: 310px;
   border-radius: 3px;
   overflow: hidden;
 }
 
-.passport-card::after {
+.passport-card:after {
   content: '';
   position: absolute;
   right: -40px;
   bottom: -90px;
   width: 240px;
   height: 240px;
-  border: 1px solid #b9bea0;
+  border: 1px solid #c8a5a5;
   border-radius: 50%;
   box-shadow:
-    0 0 0 18px #e9e7db,
-    0 0 0 19px #b9bea0,
-    0 0 0 39px #e9e7db,
-    0 0 0 40px #b9bea0;
-  opacity: 0.6;
+    0 0 0 18px #f1e6e1,
+    0 0 0 19px #c8a5a5,
+    0 0 0 39px #f1e6e1,
+    0 0 0 40px #c8a5a5;
+  opacity: .6;
 }
 
 .passport-top {
   display: flex;
   justify-content: space-between;
-  font: 0.55rem 'DM Mono', monospace;
-  letter-spacing: 0.06em;
+  gap: 12px;
+  font: .55rem 'DM Mono', monospace;
+  letter-spacing: .06em;
 }
 
 .passport-seal {
-  border: 1px solid #8c946b;
-  color: #6c774c;
+  border: 1px solid #a94b57;
+  color: #741f2b;
   border-radius: 50%;
   width: 48px;
   height: 48px;
@@ -499,13 +609,13 @@ nav a:hover {
 }
 
 .passport-stats span {
-  font-size: 0.8rem;
-  color: #67695e;
+  font-size: .8rem;
+  color: #766a67;
 }
 
 .progress {
   height: 5px;
-  background: #d0cfc1;
+  background: #d9c9c5;
   margin: 18px 0;
 }
 
@@ -513,13 +623,13 @@ nav a:hover {
   display: block;
   height: 100%;
   width: 0;
-  background: #78874c;
-  transition: width 0.3s;
+  background: #741f2b;
+  transition: width .3s;
 }
 
 .passport-card > p {
-  font-size: 0.75rem;
-  color: #62645a;
+  font-size: .75rem;
+  color: #766a67;
 }
 
 .passport-marks {
@@ -532,12 +642,12 @@ nav a:hover {
 }
 
 .passport-marks span {
-  border: 1px solid #9fa58b;
+  border: 1px solid #c8a5a5;
   padding: 5px 7px;
-  font: 0.55rem 'DM Mono', monospace;
+  font: .55rem 'DM Mono', monospace;
 }
 
-/* ASK THE ARTIST */
+/* Ask the Artist */
 
 .artist-section {
   padding: 105px 0;
@@ -545,7 +655,7 @@ nav a:hover {
 
 .artist-layout {
   display: grid;
-  grid-template-columns: 0.8fr 1fr;
+  grid-template-columns: .8fr 1fr;
   gap: 10%;
   align-items: start;
 }
@@ -567,19 +677,19 @@ nav a:hover {
   background: transparent;
   border-radius: 20px;
   padding: 9px 12px;
-  font-size: 0.72rem;
+  font-size: .72rem;
   cursor: pointer;
+  transition: .2s;
 }
 
 .artist-prompt-list button:hover {
-  background: #e0e4cf;
+  background: #f0dedd;
+  border-color: var(--rose);
 }
 
-/* CHAT INTERFACE */
-
 .chat-card {
-  background: #e7e5dc;
-  border: 1px solid #d4d2c8;
+  background: #eee2dd;
+  border: 1px solid var(--line);
 }
 
 .chat-header {
@@ -587,13 +697,13 @@ nav a:hover {
   align-items: center;
   gap: 12px;
   padding: 18px;
-  border-bottom: 1px solid #d1d0c5;
+  border-bottom: 1px solid var(--line);
 }
 
 .online-dot {
   width: 8px;
   height: 8px;
-  background: #78874c;
+  background: #741f2b;
   border-radius: 50%;
 }
 
@@ -603,19 +713,19 @@ nav a:hover {
 }
 
 .chat-header strong {
-  font-size: 0.85rem;
+  font-size: .85rem;
 }
 
 .chat-header small {
-  font-size: 0.68rem;
+  font-size: .68rem;
   color: var(--muted);
   margin-top: 4px;
 }
 
 .chat-tag {
   margin-left: auto;
-  font: 0.55rem 'DM Mono', monospace;
-  border: 1px solid #c0c0b4;
+  font: .55rem 'DM Mono', monospace;
+  border: 1px solid #c8b5b4;
   padding: 5px;
 }
 
@@ -632,12 +742,12 @@ nav a:hover {
   max-width: 88%;
   padding: 12px 14px;
   line-height: 1.65;
-  font-size: 0.82rem;
+  font-size: .82rem;
   border-radius: 3px;
 }
 
 .bubble.bot {
-  background: #f8f6ee;
+  background: var(--paper);
   align-self: flex-start;
 }
 
@@ -649,7 +759,7 @@ nav a:hover {
 
 .chat-form {
   display: flex;
-  border-top: 1px solid #d1d0c5;
+  border-top: 1px solid var(--line);
   padding: 12px;
   gap: 8px;
 }
@@ -657,10 +767,14 @@ nav a:hover {
 .chat-form input {
   min-width: 0;
   flex: 1;
-  border: 1px solid #d0cfc4;
-  background: #f8f6ee;
+  border: 1px solid var(--line);
+  background: var(--paper);
   padding: 12px;
   outline: none;
+}
+
+.chat-form input:focus {
+  border-color: var(--green);
 }
 
 .chat-form button {
@@ -673,17 +787,17 @@ nav a:hover {
 }
 
 .chat-disclaimer {
-  font-size: 0.62rem;
+  font-size: .62rem;
   color: var(--muted);
   padding: 0 15px 12px;
   margin: 0;
 }
 
-/* CLOSING SECTION */
+/* Closing section and footer */
 
 .closing {
   text-align: center;
-  background: #e4e7d6;
+  background: #eee0dc;
   padding: 95px 20px;
 }
 
@@ -695,7 +809,7 @@ nav a:hover {
   max-width: 520px;
   margin: 0 auto 25px;
   line-height: 1.8;
-  color: #5f6256;
+  color: #5f504e;
 }
 
 footer {
@@ -704,7 +818,7 @@ footer {
   justify-content: space-between;
   gap: 20px;
   align-items: center;
-  font-size: 0.7rem;
+  font-size: .7rem;
   color: var(--muted);
 }
 
@@ -712,12 +826,12 @@ footer p {
   margin: 0;
 }
 
-/* STUDY MODAL */
+/* Study-card modal */
 
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(15, 17, 14, 0.72);
+  background: rgba(25, 5, 10, .78);
   z-index: 50;
   display: none;
   align-items: center;
@@ -746,22 +860,44 @@ footer p {
   border: 0;
   font-size: 2rem;
   cursor: pointer;
+  color: var(--ink);
 }
 
 .modal-panel h2 {
   font: 500 clamp(2.5rem, 6vw, 4rem) 'Playfair Display', serif;
   margin: 10px 0;
+  padding-right: 25px;
 }
 
 .date-label {
-  font: 0.75rem 'DM Mono', monospace;
+  font: .75rem 'DM Mono', monospace;
   color: var(--green);
+}
+
+.modal-artwork {
+  margin: 22px 0 18px;
+  background: #eee0dc;
+  padding: 14px;
+}
+
+.modal-artwork img {
+  display: block;
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+}
+
+.modal-artwork figcaption {
+  font-size: .72rem;
+  color: var(--muted);
+  padding-top: 10px;
+  line-height: 1.5;
 }
 
 .modal-description {
   line-height: 1.8;
   max-width: 680px;
-  color: #4f5149;
+  color: #4f413e;
 }
 
 .modal-columns {
@@ -776,20 +912,20 @@ footer p {
 }
 
 .modal-columns li {
-  font-size: 0.82rem;
+  font-size: .82rem;
   line-height: 1.7;
   margin-bottom: 8px;
 }
 
 .source-note {
-  font-size: 0.7rem;
+  font-size: .7rem;
   color: var(--muted);
   border-top: 1px solid var(--line);
   padding-top: 15px;
   margin-bottom: 22px;
 }
 
-/* TABLET AND MOBILE */
+/* Responsive layout */
 
 @media (max-width: 760px) {
   header {
@@ -806,6 +942,8 @@ footer p {
     background: none;
     border: 0;
     font-size: 1.3rem;
+    color: var(--ink);
+    cursor: pointer;
   }
 
   .hero {
@@ -815,7 +953,7 @@ footer p {
 
   .hero-image {
     inset: 0;
-    opacity: 0.32;
+    opacity: .32;
   }
 
   .hero h1 {
@@ -827,7 +965,7 @@ footer p {
     bottom: 5%;
     width: 85px;
     height: 85px;
-    font-size: 0.48rem;
+    font-size: .48rem;
   }
 
   .intro,
@@ -848,16 +986,23 @@ footer p {
   }
 
   .timeline-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .period-card {
-    min-height: 185px;
-    padding: 17px;
+    min-height: 265px;
+  }
+
+  .period-card .period-art {
+    height: 135px;
+  }
+
+  .period-card .period-card-copy {
+    padding: 14px;
   }
 
   .period-card h3 {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
   }
 
   .compare-content {
@@ -866,6 +1011,19 @@ footer p {
 
   .compare-card {
     min-height: 140px;
+  }
+
+  .compare-artwork-pair {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .compare-artwork-pair img {
+    height: 230px;
+  }
+
+  .compare-artwork-pair .pair-note {
+    grid-column: 1;
   }
 
   .slide-note {
@@ -900,7 +1058,11 @@ footer p {
   }
 
   .period-card {
-    min-height: 150px;
+    min-height: 280px;
+  }
+
+  .period-card .period-art {
+    height: 170px;
   }
 
   .hero-stamp {
@@ -917,5 +1079,17 @@ footer p {
 
   .passport-marks {
     max-width: 100%;
+  }
+
+  .passport-top {
+    font-size: .48rem;
+  }
+
+  .modal {
+    padding: 10px;
+  }
+
+  .modal-panel {
+    max-height: 95vh;
   }
 }
