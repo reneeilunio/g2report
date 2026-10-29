@@ -1,6 +1,9 @@
-EUROPA artwork slideshow update
+EUROPA — Art of Emerging Europe
 
-Files: index.html, script.js, style.css.
-The period detail cards now include Previous/Next controls, slide dots, image counts, and captions. Each period starts with its existing working artwork image and includes additional artwork links. Secondary image links that fail are skipped automatically.
+Static website for GitHub Pages. Files: index.html, style.css, script.js.
 
-Upload/replace these three files in the root of the existing GitHub repository, commit the changes, then hard-refresh the live site with Ctrl+Shift+R.
+To publish: upload the three files to the repository root (or extract this ZIP into the repository), commit changes, then enable GitHub Pages from Settings > Pages if not already enabled.
+
+The site requires no database, login, or backend. Passport progress is stored in the visitor’s browser using localStorage. Ask the Artist is a curated simulated guide, not a live AI.
+
+Content follows the provided class presentation. Date ranges and examples are retained as shown in the slides, including places where the presentation’s date ranges overlap or artwork classifications may need confirmation from the instructor.
