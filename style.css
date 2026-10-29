@@ -11,3 +11,6 @@
 .compare-art-pair figcaption{font-size:.68rem;line-height:1.45;color:var(--muted);padding-top:6px}
 .compare-card{background:var(--paper);border:1px solid var(--line)}
 @media(max-width:760px){.period-art{height:145px}.compare-art-pair img{height:125px}}
+
+/* Artwork slideshow inside each journey card */
+.gallery-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:-12px 0 16px}.gallery-controls[hidden]{display:none}.gallery-arrow{border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:8px 11px;cursor:pointer;font-size:.75rem;border-radius:2px}.gallery-arrow:disabled{opacity:.35;cursor:default}.gallery-count{font:.65rem 'DM Mono',monospace;color:var(--muted)}.gallery-dots{display:flex;gap:5px;align-items:center;flex:1;justify-content:center}.gallery-dot{width:7px;height:7px;padding:0;border:1px solid var(--wine);border-radius:50%;background:transparent;cursor:pointer}.gallery-dot.active{background:var(--wine)}.gallery-caption{font-size:.76rem;color:var(--muted);margin:-7px 0 20px;line-height:1.5}.modal-artwork{min-height:180px}
