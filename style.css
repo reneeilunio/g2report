@@ -11,3 +11,16 @@
 .compare-art-pair figcaption{font-size:.68rem;line-height:1.45;color:var(--muted);padding-top:6px}
 .compare-card{background:var(--paper);border:1px solid var(--line)}
 @media(max-width:760px){.period-art{height:145px}.compare-art-pair img{height:125px}}
+
+/* Period artwork slideshow */
+.artwork-slideshow{margin:10px 0 22px}
+.slideshow-stage{position:relative;min-height:180px;background:#E3D4BE;display:grid;place-items:center;border:1px solid var(--line)}
+.slideshow-stage .modal-artwork{margin:0;border:0;max-height:360px;width:100%;object-fit:contain}
+.slideshow-status{margin:0;padding:30px 16px;text-align:center;font-size:.82rem;color:var(--muted)}
+.slideshow-status[hidden],.slideshow-controls[hidden]{display:none}
+.slideshow-controls{display:flex;align-items:center;justify-content:center;gap:20px;padding:10px 0 0}
+.slideshow-controls button{width:36px;height:36px;border:1px solid var(--line);background:var(--paper);color:var(--ink,var(--dark));font-size:1.1rem;cursor:pointer}
+.slideshow-controls button:hover{background:var(--wine);color:#fff}
+#slideCounter{font:.7rem 'DM Mono',monospace;color:var(--muted);min-width:42px;text-align:center}
+.slideshow-caption{margin:8px 0 0;text-align:center;font-size:.76rem;line-height:1.5;color:var(--muted)}
+@media(max-width:760px){.slideshow-stage{min-height:150px}.slideshow-stage .modal-artwork{max-height:280px}}
