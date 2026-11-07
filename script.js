@@ -23,7 +23,175 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];let
 $('#timelineList').innerHTML=periods.map((p,i)=>`<button class="period-card" data-index="${i}"><img class="period-art" src="${artworkUrl(p.title)}" alt="Artwork representing ${p.title}" loading="lazy" onerror="this.style.display='none'"><div class="period-card-copy"><span class="number">${String(i+1).padStart(2,'0')} / ${p.art.toUpperCase()}</span><h3>${p.title}</h3><p>${p.date}</p></div><span class="arrow">↗</span></button>`).join('');
 let slideItems=[],slideIndex=0,slideRequest=0;
 function renderSlide(){const img=$('#modalArtwork'),controls=$('#slideshowControls'),caption=$('#slideCaption'),item=slideItems[slideIndex];if(!item)return;img.onerror=()=>{img.hidden=true};img.onload=()=>{img.hidden=false};img.alt=item.caption;img.src=item.url;img.hidden=false;controls.hidden=slideItems.length<2;caption.hidden=slideItems.length<2;caption.textContent=item.caption;$('#slideCounter').textContent=`${slideIndex+1} / ${slideItems.length}`;$('#slidePrev').disabled=slideIndex===0;$('#slideNext').disabled=slideIndex===slideItems.length-1}
-async function findExtraArtworks(p,request){const results=[];for(const work of p.works){if(results.length>=3)break;const clean=work.split(' — ')[0].split(' (')[0].trim();if(clean.length<4)continue;try{const url='https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch='+encodeURIComponent('filetype:bitmap '+clean)+'&gsrnamespace=6&gsrlimit=1&prop=imageinfo&iiprop=url&iiurlwidth=1100&format=json&origin=*';const response=await fetch(url);if(!response.ok)continue;const data=await response.json();const pages=Object.values(data.query?.pages||{});const page=pages.find(x=>x.imageinfo?.[0]?.thumburl||x.imageinfo?.[0]?.url);const image=page?.imageinfo?.[0]?.thumburl||page?.imageinfo?.[0]?.url;if(image&&!results.some(x=>x.url===image)&&request===slideRequest)results.push({url:image,caption:clean});}catch(error){/* Keep the known working artwork if Commons is unavailable. */}}return results}
+async function findExtraArtworks(period, request) {
+    const verifiedArtworkCollection = {
+        "Ancient Greece": [
+            {
+                title: "Winged Victory of Samothrace",
+                artist: "Unknown",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Nike%20of%20Samothrace.jpg"
+            },
+            {
+                title: "Laocoön and His Sons",
+                artist: "Agesander, Athenodoros and Polydorus",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Laocoon_and_His_Sons.jpg"
+            }
+        ],
+
+        "Ancient Rome": [
+            {
+                title: "Colosseum",
+                artist: "Roman architects",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Colosseum%20in%20Rome%2C%20Italy%20-%20April%202007.jpg"
+            }
+        ],
+
+        "Renaissance": [
+            {
+                title: "Pietà",
+                artist: "Michelangelo",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Michelangelo%27s_Pieta_5450_cropncleaned_edit.jpg"
+            },
+            {
+                title: "David",
+                artist: "Michelangelo",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/David_von_Michelangelo.jpg"
+            }
+        ],
+
+        "Baroque": [
+            {
+                title: "The Calling of Saint Matthew",
+                artist: "Caravaggio",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/The_Calling_of_Saint_Matthew-Caravaggio_%281599-1600%29.jpg"
+            },
+            {
+                title: "The Elevation of the Cross",
+                artist: "Peter Paul Rubens",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/The_Elevation_of_the_Cross_by_Peter_Paul_Rubens.jpg"
+            }
+        ],
+
+        "Rococo": [
+            {
+                title: "The Swing",
+                artist: "Jean-Honoré Fragonard",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Fragonard%2C_The_Swing.jpg"
+            }
+        ],
+
+        "Romanticism": [
+            {
+                title: "The Raft of the Medusa",
+                artist: "Théodore Géricault",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Jericho%27s_Raft_of_the_Medusa.jpg"
+            },
+            {
+                title: "Liberty Leading the People",
+                artist: "Eugène Delacroix",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Eug%C3%A8ne_Delacroix_-_La_libert%C3%A9_guidant_le_peuple.jpg"
+            }
+        ],
+
+        "Realism": [
+            {
+                title: "The Stone Breakers",
+                artist: "Gustave Courbet",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Gustave_Courbet_-_The_Stonebreakers_-_WGA05457.jpg"
+            },
+            {
+                title: "The Gleaners",
+                artist: "Jean-François Millet",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Jean-Francois_Millet_-_Gleaners_-_Google_Art_Project_2.jpg"
+            }
+        ],
+
+        "Impressionism": [
+            {
+                title: "Impression, Sunrise",
+                artist: "Claude Monet",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Claude_Monet%2C_Impression%2C_soleil_levant.jpg"
+            },
+            {
+                title: "Luncheon of the Boating Party",
+                artist: "Pierre-Auguste Renoir",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Pierre-Auguste_Renoir_-_Luncheon_of_the_Boating_Party_-_Google_Art_Project.jpg"
+            }
+        ],
+
+        "Post-Impressionism": [
+            {
+                title: "The Starry Night",
+                artist: "Vincent van Gogh",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"
+            },
+            {
+                title: "The Large Bathers",
+                artist: "Paul Cézanne",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Paul_Cezanne_-_The_Large_Bathers.jpg"
+            }
+        ],
+
+        "Neo-Impressionism": [
+            {
+                title: "A Sunday Afternoon on the Island of La Grande Jatte",
+                artist: "Georges Seurat",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Georges_Seurat_-_Un_dimanche_apr%C3%A8s-midi_%C3%A0_l%27%C3%AEle_de_la_Grande_Jatte.jpg"
+            }
+        ],
+
+        "Art Nouveau": [
+            {
+                title: "The Kiss",
+                artist: "Gustav Klimt",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Gustav_Klimt_016.jpg"
+            }
+        ],
+
+        "Fauvism": [
+            {
+                title: "Woman with a Hat",
+                artist: "Henri Matisse",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Matisse-Woman-with-a-Hat.jpg"
+            },
+            {
+                title: "Open Window",
+                artist: "Henri Matisse",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Henri_Matisse_-_Open_Window.jpg"
+            }
+        ],
+
+        "Cubism": [
+            {
+                title: "Violin and Candlestick",
+                artist: "Georges Braque",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Violin_and_Candlestick.jpg"
+            }
+        ],
+
+        "Futurism": [
+            {
+                title: "Dynamic Hieroglyphic of the Bal Tabarin",
+                artist: "Gino Severini",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Gino_Severini_-_Dynamic_Hieroglyphic_of_the_Bal_Tabarin.jpg"
+            },
+            {
+                title: "Battle of Lights",
+                artist: "Joseph Stella",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Joseph_Stella_-_Battle_of_Lights%2C_Coney_Island.jpg"
+            },
+            {
+                title: "The Cyclist",
+                artist: "Natalia Goncharova",
+                url: "https://commons.wikimedia.org/wiki/Special:FilePath/Natalia_Goncharova%2C_1913%2C_The_Cyclist.jpg"
+            }
+        ]
+    };
+
+    if (request !== slideRequest) return [];
+
+    return verifiedArtworkCollection[period.title] || [];
+}
 async function openPeriod(i){active=i;const request=++slideRequest;let p=periods[i];$('#modalEyebrow').textContent=`PERIOD ${String(i+1).padStart(2,'0')} / ${p.tag}`;$('#modalTitle').textContent=p.title;$('#modalDate').textContent=p.date;slideItems=[{url:artworkUrl(p.title),caption:`Featured artwork for ${p.title}`}];slideIndex=0;$('#slideshowControls').hidden=true;$('#slideCaption').hidden=true;renderSlide();$('#modalDescription').textContent=p.desc;$('#modalIdeas').innerHTML=p.ideas.map(x=>`<li>${x}</li>`).join('');$('#modalWorks').innerHTML=p.works.map(x=>`<li>${x}</li>`).join('');$('#markExplored').textContent=stored().includes(i)?'Explored ✓':'Mark as explored ✓';$('#modal').classList.add('open');$('#modal').setAttribute('aria-hidden','false');const extras=await findExtraArtworks(p,request);if(request!==slideRequest||active!==i)return;const first=artworkUrl(p.title);slideItems=[{url:first,caption:`Featured artwork for ${p.title}`},...extras.filter(x=>x.url!==first)];slideIndex=0;renderSlide()}$('#slidePrev').onclick=()=>{if(slideIndex>0){slideIndex--;renderSlide()}};$('#slideNext').onclick=()=>{if(slideIndex<slideItems.length-1){slideIndex++;renderSlide()}};$('#timelineList').addEventListener('click',e=>{let c=e.target.closest('[data-index]');if(c)openPeriod(+c.dataset.index)});function closeModal(){$('#modal').classList.remove('open');$('#modal').setAttribute('aria-hidden','true')}$('#closeModal').onclick=closeModal;$('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});$('#markExplored').onclick=()=>{let a=stored();if(!a.includes(active))a.push(active);save(a);$('#markExplored').textContent='Explored ✓'};$('#resetPassport').onclick=()=>{if(confirm('Reset your explored-period progress?'))save([])};
 const compare={themes:[['Greek & Roman mythology','Mythological stories and figures appear in the lesson’s artwork examples.'],['Religion','Religious subjects and Christian scripture are central to many works discussed, especially in the Middle Ages and Baroque examples.'],['Human society','The lesson connects art with people, social change, revolution, and cultural values.'],['Everyday life','Realism and Impressionism provide examples of ordinary people and scenes.']],styles:[['Baroque & Rococo','Ornament, extravagance, color palettes, dramatic lighting, and fluid design.'],['Neoclassicism','Classical revival, aesthetic beauty, symmetry, and calculation.'],['Romanticism','Heroic elements, emotion, revolution, justice, equality, and social order.'],['Realism','Accuracy of detail; depicting and mirroring reality.'],['Impressionism','Distinct brushstrokes, color, light, shadows, and rejection of clarity of form.']]};const comparisonArt=[
 {title:'Baroque & Rococo',left:'Baroque',right:'Rococo',leftImg:artworkImages['Baroque'],rightImg:artworkImages['Rococo'],note:'Baroque often uses dramatic lighting and intense movement; Rococo favors lighter, playful ornament and decorative elegance.'},
